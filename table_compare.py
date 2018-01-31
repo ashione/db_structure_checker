@@ -148,8 +148,8 @@ class DBConfig(object):
 
 if __name__  == '__main__':
 
-    nova_origin = DBConfig('root','ntse','s.zuolx.com','nova')
-    nova_variant = DBConfig('root','ntse','s.zuolx.com','nova_variant')
+    nova_origin = DBConfig('root','xxx','xxx','nova')
+    nova_variant = DBConfig('root','xxx','xxx','nova_variant')
 
     nova_origin == nova_variant
 
@@ -157,10 +157,3 @@ if __name__  == '__main__':
     print nova_origin.compare_table_column(nova_variant)
     print nova_origin.compare_table_indexes(nova_variant)
     print nova_origin.compare_table_fk(nova_variant)
-
-    cinder_origin = DBConfig('root','ntse','s.zuolx.com','cinder')
-    cinder_variant = DBConfig('root','ntse','s.zuolx.com','cinder_variant')
-    print cinder_origin.compare_table_name(cinder_variant)
-    print cinder_origin.compare_table_column(cinder_variant)
-    print cinder_origin.compare_table_indexes(cinder_variant)
-    print cinder_origin.compare_table_fk(cinder_variant)
