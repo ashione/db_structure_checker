@@ -17,6 +17,7 @@ pip install -r ./requirements.txt
 # equal function was overrided to check four components.
 # Equality wil return True, otherwise False
     # nova_origin == nova_variant
+```
 
 ```
     print nova_origin.compare_table_name(nova_variant)
