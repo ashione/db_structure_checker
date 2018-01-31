@@ -6,7 +6,7 @@ from termcolor import colored
 def print_wrap(func):
     def __decorator(self,compared):
         print '*' * 30 
-        print '%s bettween (%s,%s)\n' %(func.func_name,self.db_name ,compared.db_name)
+        print '%s bettween (%s,%s)\n' %(func.func_name,self.db_name,compared.db_name)
         ret = func(self,compared)
         print '*' *30
         return ret
@@ -14,6 +14,7 @@ def print_wrap(func):
 
 
 class DBConfig(object):
+
     def __init__(self,db_user,db_password,db_host,db_name,db_port=3306,db_engine='mysql'):
         self.db_user = db_user;
         self.db_password = db_password
@@ -38,7 +39,7 @@ class DBConfig(object):
 
     def compare_table_name(self,compared):
         if set(self.table_name_set()) & set(compared.table_name_set()):
-            print 'table set are same'
+            print colored('table set are same','green')
 
 
     @staticmethod
@@ -86,8 +87,8 @@ class DBConfig(object):
                     #ipdb.set_trace()
 
                     flag = False
-                    print colored('column %s, property %s not eq [%s -> %s]' \
-                            %(o_column,o_property,
+                    print colored('table %s column %s, property %s not eq [%s -> %s]' \
+                            %(table_name,o_column,o_property,
                               v_table_dict[o_column][o_property],
                               o_table_dict[o_column][o_property]),
                             'red')
@@ -137,7 +138,8 @@ class DBConfig(object):
                 table_name in tables]})
 
     def __eq__(self,other):
-        if self.compare_table_column(other) and \
+        if self.compare_table_name(other) and \
+           self.compare_table_column(other) and \
            self.compare_table_indexes(other) and \
            self.compare_table_fk(other):
                return True
@@ -149,7 +151,7 @@ if __name__  == '__main__':
     nova_origin = DBConfig('root','ntse','s.zuolx.com','nova')
     nova_variant = DBConfig('root','ntse','s.zuolx.com','nova_variant')
 
-    # nova_origin == nova_variant
+    nova_origin == nova_variant
 
     print nova_origin.compare_table_name(nova_variant)
     print nova_origin.compare_table_column(nova_variant)
